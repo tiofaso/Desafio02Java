@@ -28,3 +28,9 @@ As opções para o admin ter controle total na base foram removidas, permitindo 
 **vendedor**
  - usuário: cleberson.isac@lojazup.com.br
  - senha: 123456isac
+
+> 
+> **Warning**:
+Para rodar o programa localmente é preciso instalar a dependência **mysql-connector-j-8.0.33.jar** que se encontra no diretório **/mysql-connector-dependency**.
+
+[Nesse vídeo do youtube](https://www.youtube.com/watch?v=zGnL-LIFT9Y) é possivel acompanhar o processo de instalação no [IntelliJ](https://www.jetbrains.com/pt-br/idea/).
