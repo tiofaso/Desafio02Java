@@ -7,6 +7,7 @@ public class LeitorTeclado {//Funções de leitura de teclado
         System.out.println("2 - Mostrar todos vendedores");
         System.out.println("3 - Mostrar todos clientes");
         System.out.println("4 - Mostrar todas vendas");
+        System.out.println("5 - Mostrar vendas por vendedor");
 
         Scanner entrada = new Scanner(System.in);
 
@@ -21,6 +22,7 @@ public class LeitorTeclado {//Funções de leitura de teclado
         System.out.println("2 - Cadastrar venda");
         System.out.println("3 - Mostrar todas as suas vendas");
         System.out.println("4 - Mostrar todos os seus clientes");
+        System.out.println("5 - Pesquisar vendas por CPF");
 
         Scanner entrada = new Scanner(System.in);
 
@@ -42,6 +44,7 @@ public class LeitorTeclado {//Funções de leitura de teclado
         System.out.println("2 - Mostrar todos vendedores");
         System.out.println("3 - Mostrar todos clientes");
         System.out.println("4 - Mostrar todas vendas");
+        System.out.println("5 - Mostrar vendas por vendedor");
 
         Scanner entrada = new Scanner(System.in);
 
@@ -56,6 +59,7 @@ public class LeitorTeclado {//Funções de leitura de teclado
         System.out.println("2 - Cadastrar venda");
         System.out.println("3 - Mostrar todas as suas vendas");
         System.out.println("4 - Mostrar todos os seus clientes");
+        System.out.println("5 - Pesquisar vendas por CPF");
 
         Scanner entrada = new Scanner(System.in);
 

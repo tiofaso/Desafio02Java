@@ -112,10 +112,143 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
             System.out.println(e);
         }
     }
-    public void mostraClientes(){}
+    public void mostraClientes(){
+        try {
+            //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
+            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
 
-    //Funções de venda
-    public void mostraMeusClientes(){}
-    public void mostraMinhasVendas(){}
+            mysqlQuery = "SELECT usuario, email, cpf, nome " +
+                    "FROM tb_cliente";
 
+            PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
+
+            ResultSet lista = statement.executeQuery();
+
+            while (lista.next()) {
+                System.out.println("Nome: " + lista.getString("nome"));
+                System.out.println("e-mail: " + lista.getString("email"));
+                System.out.println("CPF: " + lista.getString("cpf"));
+                System.out.println("Atendido por: " + lista.getString("usuario"));
+                System.out.println("--");
+            }
+
+            conexao.close();
+
+        } catch (Exception e) {
+            System.err.println("Deu ruim...");
+            // printStackTrace method
+            // prints line numbers + call stack
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+    }
+
+    public void mostraVendas(){
+        try {
+            //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
+            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+
+            mysqlQuery = "SELECT usuario, nome, email, cliente, vendedor, data, hora " +
+                    "FROM tb_cliente INNER JOIN tb_registrovenda " +
+                    "WHERE tb_registrovenda.cliente = tb_cliente.cpf " +
+                    "ORDER BY data, hora";
+
+            PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
+
+            ResultSet lista = statement.executeQuery();
+
+            while (lista.next()) {
+                System.out.println("Nome: " + lista.getString("tb_cliente.nome"));
+                System.out.println("e-mail: " + lista.getString("tb_cliente.email"));
+                System.out.println("CPF: " + lista.getString("tb_registrovenda.cliente"));
+                System.out.println("Atendido por: " + lista.getString("tb_cliente.usuario"));
+                System.out.println("Data: " + lista.getDate("tb_registrovenda.data"));
+                System.out.println("Hora: " + lista.getTime("tb_registrovenda.hora"));
+                System.out.println("--");
+            }
+
+            conexao.close();
+
+        } catch (Exception e) {
+            System.err.println("Deu ruim...");
+            // printStackTrace method
+            // prints line numbers + call stack
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+    }
+
+
+    public void mostraVendasVendedor(String email){
+        try {
+            //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
+            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+
+            mysqlQuery = "SELECT usuario, nome, email, cliente, vendedor, data, hora " +
+                    "FROM tb_cliente INNER JOIN tb_registrovenda " +
+                    "WHERE tb_registrovenda.cliente = tb_cliente.cpf " +
+                    "AND tb_registrovenda.vendedor = '" + email + "' " +
+                    "ORDER BY data, hora";
+
+            PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
+
+            ResultSet lista = statement.executeQuery();
+            if(lista.next() == true){
+                while (lista.next()) {
+                    System.out.println("Nome: " + lista.getString("tb_cliente.nome"));
+                    System.out.println("e-mail: " + lista.getString("tb_cliente.email"));
+                    System.out.println("CPF: " + lista.getString("tb_registrovenda.cliente"));
+                    System.out.println("Atendido por: " + lista.getString("tb_cliente.usuario"));
+                    System.out.println("Data: " + lista.getDate("tb_registrovenda.data"));
+                    System.out.println("Hora: " + lista.getTime("tb_registrovenda.hora"));
+                    System.out.println("--");
+                }
+            }else {
+                System.out.println("- vendedor não localizado -");
+            }
+
+
+            conexao.close();
+
+        } catch (Exception e) {
+            System.err.println("Deu ruim...");
+            // printStackTrace method
+            // prints line numbers + call stack
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+    }
+
+    public void criaSenha(String email, String senha){
+        try {
+            //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
+            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+
+            mysqlQuery = "INSERT INTO tb_login (usuario, senha, nivel ) " +
+                    "VALUES (?, ?, ?)";
+
+            PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
+            statement.setString(1,email);
+            statement.setString(2,senha);
+            statement.setInt(3,1);
+
+            statement.execute();
+
+            conexao.close();
+
+            System.out.println("Senha criada com sucesso!");
+
+
+        } catch (Exception e) {
+            System.err.println("Deu ruim...");
+            // printStackTrace method
+            // prints line numbers + call stack
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+    }
 }

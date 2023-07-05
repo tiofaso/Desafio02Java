@@ -1,6 +1,6 @@
 public abstract  class Usuarios {
     //Atributos
-    private String login; //identificador do usuário (email)
+    private static String login; //identificador do usuário (email)
     private String nome; //nome do usuário
     private int acesso; //nível de acesso do usuário (1 vendedor/2 cliente/0 admin)
     private String senha; //senha do usuário

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Login {
+public class Login extends Usuarios{
     String usuario;
     String senha;
 
@@ -38,6 +38,9 @@ public class Login {
 
         //Verificando dados digitados na base
         Validacoes validaLogin = new Validacoes();
+
+        setLogin(usuario); //armazenando o login do usuário
+
         return validaLogin.checkLoginDb(usuario,senha);
     }//end fazLogin
 

@@ -141,4 +141,38 @@ public class Validacoes {
         }
         return resultadoCpf;
     }//end verificaCpfRepetido
+
+    public Boolean verificaCpfDbVendedor(String cpf, String login){//Verifica se o cpf já existe na base
+        Boolean resultadoCpf = null;
+
+        try {
+            //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
+
+            mysqlQuery = "SELECT email FROM tb_cliente WHERE cpf = '" + cpf + "' AND usuario = '" + login +"'";
+
+            PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
+
+            ResultSet lista = statement.executeQuery();
+
+            if (lista.next() == true) {
+                resultadoCpf = true;
+
+            }
+            else{
+                resultadoCpf = false;
+            }
+
+            conexao.close();
+
+        } catch (Exception e) {
+            System.err.println("! Deu ruim...");
+            // printStackTrace method
+            // prints line numbers + call stack
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+        return resultadoCpf;
+    }//end verificaCpfRepetido
 }

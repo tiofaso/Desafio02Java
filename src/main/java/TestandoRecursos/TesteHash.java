@@ -4,7 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class TesteHash {//Classe para testar criação de hash usando java.security
     public static void main(String[] args) {
-        String senhaPlana = "123456faso";
+        String senhaPlana = "123456hanoi";
         String saltoAutomatico;
         String senhaHashSalto;
 
