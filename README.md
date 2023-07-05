@@ -4,7 +4,7 @@ O programa aqui apresentado emula um sistema de cadastro e exibição de dados e
 
 Para a execução desse projeto em seu maior potencial foi optado por conectar o mesmo a uma base remota MySQL disponibilizada pelo site do autor. Abaixo segue o diagrama da supracitada:
 
-![Diagrama da base de dados]([https://raw.githubusercontent.com/tiofaso/Desafio02Java/main/src/main/java/uml/desafio02db.drawio.png](https://github.com/tiofaso/Desafio02Java/blob/main/src/main/java/uml/desafio02db.drawio.png))
+![Diagrama da base de dados](https://raw.githubusercontent.com/tiofaso/Desafio02Java/main/src/main/java/uml/desafio02db.drawio.png?token=GHSAT0AAAAAACCYQQ5VYA74NW7D7P35CXDMZFF2MJQ)
 
 ## Como se opera o programa
 O programa trabalha com dois níveis de acesso:
