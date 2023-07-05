@@ -3,22 +3,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e manipulação da base de dados
+public class AcessosDbAdmin extends Usuarios {//Classe com todos os acessos e manipulação da base de dados
     private String mysqlQuery;
     private String conexaoServidor = "jdbc:mysql://149.56.20.143:3306/marcamar_catalisa";
     private String conexaoUsuario = "marcamar_catalistico";
     private String conexaoSenha = "1248C4t4l1z4!";
 
-    public AcessosDbAdmin() {}
+    public AcessosDbAdmin() {
+    }
 
     //Funções gerais
 
 
     //Funções de administração
-    public void adicionaVendedorDb(String nome, String email, String cpf){
+    public void adicionaVendedorDb(String nome, String email, String cpf) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             String usuario = email;
 
@@ -26,10 +27,10 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
                     "VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
-            statement.setString(1,usuario);
-            statement.setString(2,email);
-            statement.setString(3,cpf);
-            statement.setString(4,nome);
+            statement.setString(1, usuario);
+            statement.setString(2, email);
+            statement.setString(3, cpf);
+            statement.setString(4, nome);
 
 
             statement.execute();
@@ -49,11 +50,14 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
         }
 
     }
-    public void mostraUsuarios(){}
+
+    public void mostraUsuarios() {
+    }
+
     public void mostraVendedores() {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "SELECT usuario, email, cpf, nome " +
                     "FROM tb_vendedor";
@@ -81,19 +85,20 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
         }
 
     }
-    public void adicionaCliente(String vendedor, String nomeCliente, String emailCliente, String cpfCliente){
+
+    public void adicionaCliente(String vendedor, String nomeCliente, String emailCliente, String cpfCliente) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "INSERT INTO tb_cliente (usuario, nome, email, cpf ) " +
                     "VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
-            statement.setString(1,vendedor);
-            statement.setString(2,nomeCliente);
-            statement.setString(3,emailCliente);
-            statement.setString(4,cpfCliente);
+            statement.setString(1, vendedor);
+            statement.setString(2, nomeCliente);
+            statement.setString(3, emailCliente);
+            statement.setString(4, cpfCliente);
 
 
             statement.execute();
@@ -112,10 +117,11 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
             System.out.println(e);
         }
     }
-    public void mostraClientes(){
+
+    public void mostraClientes() {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "SELECT usuario, email, cpf, nome " +
                     "FROM tb_cliente";
@@ -144,10 +150,10 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
         }
     }
 
-    public void mostraVendas(){
+    public void mostraVendas() {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "SELECT usuario, nome, email, cliente, vendedor, data, hora " +
                     "FROM tb_cliente INNER JOIN tb_registrovenda " +
@@ -181,10 +187,10 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
     }
 
 
-    public void mostraVendasVendedor(String email){
+    public void mostraVendasVendedor(String email) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "SELECT usuario, nome, email, cliente, vendedor, data, hora " +
                     "FROM tb_cliente INNER JOIN tb_registrovenda " +
@@ -195,7 +201,7 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
 
             ResultSet lista = statement.executeQuery();
-            if(lista.next() == true){
+            if (lista.next() == true) {
                 while (lista.next()) {
                     System.out.println("Nome: " + lista.getString("tb_cliente.nome"));
                     System.out.println("e-mail: " + lista.getString("tb_cliente.email"));
@@ -205,7 +211,7 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
                     System.out.println("Hora: " + lista.getTime("tb_registrovenda.hora"));
                     System.out.println("--");
                 }
-            }else {
+            } else {
                 System.out.println("- vendedor não localizado -");
             }
 
@@ -222,18 +228,18 @@ public class AcessosDbAdmin extends Usuarios{//Classe com todos os acessos e man
         }
     }
 
-    public void criaSenha(String email, String senha){
+    public void criaSenha(String email, String senha) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "INSERT INTO tb_login (usuario, senha, nivel ) " +
                     "VALUES (?, ?, ?)";
 
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
-            statement.setString(1,email);
-            statement.setString(2,senha);
-            statement.setInt(3,1);
+            statement.setString(1, email);
+            statement.setString(2, senha);
+            statement.setInt(3, 1);
 
             statement.execute();
 

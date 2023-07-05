@@ -1,4 +1,4 @@
-public abstract  class Usuarios {
+public abstract class Usuarios {
     //Atributos
     private static String login; //identificador do usuário (email)
     private String nome; //nome do usuário
@@ -17,11 +17,16 @@ public abstract  class Usuarios {
         this.email = email;
     }
 
-    public Usuarios() {}
+    public Usuarios() {
+    }
 
     //Métodos
-    public Boolean login(String login, String senha){return null;}
-    public void mostraUsuario(String login){}
+    public Boolean login(String login, String senha) {
+        return null;
+    }
+
+    public void mostraUsuario(String login) {
+    }
 
     //Getters & Setters
     public String getLogin() {

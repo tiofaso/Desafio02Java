@@ -1,6 +1,6 @@
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-public class AdminSudo extends Usuarios{
+public class AdminSudo extends Usuarios {
     public AdminSudo(String nome, String senha, String cpf, String email) {
         super(nome, senha, cpf, email);
         setNome(nome);
@@ -9,7 +9,8 @@ public class AdminSudo extends Usuarios{
         setEmail(email);
     }
 
-    public AdminSudo(){}
+    public AdminSudo() {
+    }
 
     public void adicionaVendedor() {
         String nome = getNome();
@@ -20,31 +21,31 @@ public class AdminSudo extends Usuarios{
         novoVendedor.adicionaVendedorDb(nome, emal, cpf);
     }
 
-    public void mostraVendedor(){
+    public void mostraVendedor() {
         AcessosDbAdmin listaVendedores = new AcessosDbAdmin();
         listaVendedores.mostraVendedores();
 
     }
 
-    public void mostraCliente(){
+    public void mostraCliente() {
         AcessosDbAdmin listaClientes = new AcessosDbAdmin();
         listaClientes.mostraClientes();
 
     }
 
-    public void mostraVendas(){
+    public void mostraVendas() {
         AcessosDbAdmin listaVendas = new AcessosDbAdmin();
         listaVendas.mostraVendas();
 
     }
 
-    public void mostraVendasPorVendedor(String email){
+    public void mostraVendasPorVendedor(String email) {
         AcessosDbAdmin listaVendas = new AcessosDbAdmin();
         listaVendas.mostraVendasVendedor(email);
 
     }
 
-    public void criaSenha(String email, String senha){
+    public void criaSenha(String email, String senha) {
         //Gerando salto
         String saltoAutomatico = BCrypt.gensalt();
 
