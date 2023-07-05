@@ -3,7 +3,8 @@
 O programa aqui apresentado emula um sistema de cadastro e exibição de dados e vendas para clientes com os seus respectivos vendedores.
 
 Para a execução desse projeto em seu maior potencial foi optado por conectar o mesmo a uma base remota MySQL disponibilizada pelo site do autor. Abaixo segue o diagrama da supracitada:
-![Legenda]([url da img](https://raw.githubusercontent.com/tiofaso/Desafio02Java/main/src/main/java/uml/desafio02db.drawio.png))
+
+![Diagrama da base de dados]([https://raw.githubusercontent.com/tiofaso/Desafio02Java/main/src/main/java/uml/desafio02db.drawio.png](https://github.com/tiofaso/Desafio02Java/blob/main/src/main/java/uml/desafio02db.drawio.png))
 
 ## Como se opera o programa
 O programa trabalha com dois níveis de acesso:
