@@ -2,28 +2,29 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e manipulação da base de dados
+public class AcessosDbVendedor extends Usuarios {//Classe com todos os acessos e manipulação da base de dados
     private String mysqlQuery;
     private String conexaoServidor = "jdbc:mysql://149.56.20.143:3306/marcamar_catalisa";
     private String conexaoUsuario = "marcamar_catalistico";
     private String conexaoSenha = "1248C4t4l1z4!";
 
-    public AcessosDbVendedor() {}
+    public AcessosDbVendedor() {
+    }
 
     //Funções gerais
-    public void adicionaCliente(String vendedor, String nomeCliente, String emailCliente, String cpfCliente){
+    public void adicionaCliente(String vendedor, String nomeCliente, String emailCliente, String cpfCliente) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "INSERT INTO tb_cliente (usuario, email, cpf, nome ) " +
                     "VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
-            statement.setString(1,vendedor);
-            statement.setString(2,emailCliente);
-            statement.setString(3,cpfCliente);
-            statement.setString(4,nomeCliente);
+            statement.setString(1, vendedor);
+            statement.setString(2, emailCliente);
+            statement.setString(3, cpfCliente);
+            statement.setString(4, nomeCliente);
 
             statement.execute();
 
@@ -43,30 +44,29 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
     }
 
     //Funções de venda
-    public void mostraMeusClientes(String loginVendedor){
+    public void mostraMeusClientes(String loginVendedor) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "SELECT usuario, email, cpf, nome " +
-                    "FROM tb_cliente WHERE usuario = '" + loginVendedor +"'" +
+                    "FROM tb_cliente WHERE usuario = '" + loginVendedor + "'" +
                     " ORDER BY nome";
 
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
 
             ResultSet lista = statement.executeQuery();
 
-            if(lista.next() == true){
+            if (lista.next() == true) {
                 while (lista.next()) {
                     System.out.println("Nome: " + lista.getString("nome"));
                     System.out.println("e-mail: " + lista.getString("email"));
                     System.out.println("CPF: " + lista.getString("cpf"));
                     System.out.println("--");
                 }
-            }else {
+            } else {
                 System.out.println("- sem itens para exibir -");
             }
-
 
 
             conexao.close();
@@ -80,15 +80,16 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
             System.out.println(e);
         }
     }
-    public void mostraMinhasVendas(String loginVendedor){
+
+    public void mostraMinhasVendas(String loginVendedor) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "SELECT vendedor, cliente, valor, email, data, hora, nome, cpf " +
                     "FROM tb_registrovenda INNER JOIN tb_cliente " +
                     "ON tb_registrovenda.vendedor =  tb_cliente.usuario " +
-                    "AND tb_registrovenda.vendedor = '" + loginVendedor +"'" +
+                    "AND tb_registrovenda.vendedor = '" + loginVendedor + "'" +
                     " AND tb_registrovenda.cliente = tb_cliente.cpf " +
                     " ORDER BY data, hora";
 
@@ -96,7 +97,7 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
 
             ResultSet lista = statement.executeQuery();
 
-            if(lista.next() == true){
+            if (lista.next() == true) {
                 while (lista.next()) {
                     System.out.println("Nome: " + lista.getString("tb_cliente.nome"));
                     System.out.println("e-mail: " + lista.getString("tb_cliente.email"));
@@ -107,7 +108,7 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
                     System.out.println("--");
                 }
 
-            }else {
+            } else {
                 System.out.println("- sem itens para exibir -");
             }
 
@@ -124,22 +125,22 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
         }
     }
 
-    public void adicionarVenda(String loginVendedor, String cpfCliente, double valorVenda){
+    public void adicionarVenda(String loginVendedor, String cpfCliente, double valorVenda) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "INSERT INTO tb_registrovenda (vendedor, cliente, valor, data, hora) " +
-                    "VALUES (?, ?, ?, ?, ?)" ;
+                    "VALUES (?, ?, ?, ?, ?)";
 
             Date data = Date.valueOf(LocalDate.now());
             Time hora = Time.valueOf(LocalTime.now());
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
-            statement.setString(1,loginVendedor);
-            statement.setString(2,cpfCliente);
-            statement.setDouble(3,valorVenda);
-            statement.setDate(4,data);
-            statement.setTime(5,hora);
+            statement.setString(1, loginVendedor);
+            statement.setString(2, cpfCliente);
+            statement.setDouble(3, valorVenda);
+            statement.setDate(4, data);
+            statement.setTime(5, hora);
 
             statement.execute();
 
@@ -159,10 +160,10 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
 
     }
 
-    public void pesquisaVendasCpf(String cpf){
+    public void pesquisaVendasCpf(String cpf) {
         try {
             //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
-            Connection conexao = DriverManager.getConnection(conexaoServidor,conexaoUsuario,conexaoSenha);
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
 
             mysqlQuery = "SELECT vendedor, cliente, valor, email, data, hora, nome, cpf " +
                     "FROM tb_registrovenda INNER JOIN tb_cliente " +
@@ -173,7 +174,7 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
             PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
 
             ResultSet lista = statement.executeQuery();
-            if(lista.next() == true){
+            if (lista.next() == true) {
                 while (lista.next()) {
                     System.out.println("Nome: " + lista.getString("tb_cliente.nome"));
                     System.out.println("e-mail: " + lista.getString("tb_cliente.email"));
@@ -183,7 +184,7 @@ public class AcessosDbVendedor extends Usuarios{//Classe com todos os acessos e 
                     System.out.println("Hora: " + lista.getString("tb_registrovenda.hora"));
                     System.out.println("--");
                 }
-            }else {
+            } else {
                 System.out.println("- sem itens para exibir -");
             }
 
