@@ -1,0 +1,115 @@
+marcamar_catalisa
+catalistico
+1248C4t4l1z4!
+
+https://dev.mysql.com/downloads/windows/installer/8.0.html
+
+----
+usuários db
+administrador
+Fábio Luiz Sousa Vaz 
+tiofaso@zup.com.br
+123456faso
+432.600.730-35
+$2a$10$SOsbtCs7./YI/NjXnLu4C.lYA/lQUIPL6jR9NpnrUpewy//cf2QvC
+
+vendedores
+Cleberson Isac Leal de França
+cleberson.isac@lojazup.com.br
+123456isac
+692.521.520-75
+
+Maísa Wendy de Corona
+maisa.wendy@lojazup.com.br
+123456wendy
+331.256.900-13
+
+Felipe Bruno Matias Mendes Rossi
+felipe.bruno@lojazup.com.br
+123456bruno
+849.338.880-78
+
+Daniel Hanoi
+daniel.hanoi@lojazup.com.br
+115.665.110-70
+123456hanoi
+
+Amércia Los Santos
+amercia.santos@lojazup.com.br
+258.454.340-09
+123456santos
+
+clientes
+Rafael Leo Azevedo Ávila
+504.951.820-28
+rafaleo@gmail.com
+
+Teobaldo Eustáquio Batista da Cruz
+400.469.920-73
+teobaldo.batista@ig.com.br
+
+Lilian Yeda Lozano
+471.047.010-36
+yedaleda@hotmail.com
+
+Altino Edivaldo de Batista
+470.047.010-36
+altinobatista@uol.com.br
+
+Ana Ivanete de Bittencourt
+332.572.060-97
+anaivabitt@outlook.com
+
+Cibele Oliveira
+743.163.510-95
+cibasoliveira@bol.com.br
+
+Dina Taís Delatorre
+127.895.980-70
+dinadelatorre@msn.com
+
+Bianca Tainá Fonseca
+040.229.790-38
+bia.fonseca@yahoo.com
+
+Elizabete Burgos
+610.684.690-13
+burgos.bete@zipmail.com.br
+
+Gabriela Tainá Flores Queirós
+610.684.690-13
+gabyflores@terra.com.br
+
+bases:
+tb_login
+tb_cliente
+tb_vendedor
+tb_registrovendas
+
+tb_login
+> id
+> usuario
+> senha
+> nivel
+
+tb_vendedor
+> id
+> usuario
+> email
+> cpf
+> nome
+
+tb_cliente
+> id
+> usuario
+> nome
+> email
+> cpf
+
+tb_registrovendas
+> id
+> vendedor
+> cliente
+> valor
+> data
+> hora
