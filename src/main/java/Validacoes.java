@@ -65,4 +65,80 @@ public class Validacoes {
 
         return teste;
     }//end montaHash
+
+    public Boolean verificaEmailDb(String email, int area){//Verifica se o cpf já existe na base
+        Boolean resultadoEmail = null;
+
+        try {
+            //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
+
+            if(area == 0) {//Pesquisa base de vendedores
+                mysqlQuery = "SELECT email FROM tb_vendedor WHERE email = '" + email + "'";
+            }else if (area == 1){//Pesquisa base de clientes
+                mysqlQuery = "SELECT email FROM tb_cliente WHERE email = '" + email + "'";
+            }
+
+            PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
+
+            ResultSet lista = statement.executeQuery();
+
+            if (lista.next() == true) {
+                resultadoEmail = true;
+
+            }
+            else{
+                resultadoEmail = false;
+            }
+
+            conexao.close();
+
+        } catch (Exception e) {
+            System.err.println("! Deu ruim...");
+            // printStackTrace method
+            // prints line numbers + call stack
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+        return resultadoEmail;
+    }//end verificaCpfRepetido
+
+    public Boolean verificaCpfDb(String cpf, int area){//Verifica se o cpf já existe na base
+        Boolean resultadoCpf = null;
+
+        try {
+            //Class.forName("com.mysql.jdbc.Driver"); /* Aqui registra */
+            Connection conexao = DriverManager.getConnection(conexaoServidor, conexaoUsuario, conexaoSenha);
+
+            if(area == 0) {//Pesquisa base de vendedores
+                mysqlQuery = "SELECT cpf FROM tb_vendedor WHERE cpf = '" + cpf + "'";
+            }else if (area == 1){//Pesquisa base de clientes
+                mysqlQuery = "SELECT email FROM tb_cliente WHERE cpf = '" + cpf + "'";
+            }
+
+            PreparedStatement statement = conexao.prepareStatement(mysqlQuery);
+
+            ResultSet lista = statement.executeQuery();
+
+            if (lista.next() == true) {
+                resultadoCpf = true;
+
+            }
+            else{
+                resultadoCpf = false;
+            }
+
+            conexao.close();
+
+        } catch (Exception e) {
+            System.err.println("! Deu ruim...");
+            // printStackTrace method
+            // prints line numbers + call stack
+            e.printStackTrace();
+            // Prints what exception has been thrown
+            System.out.println(e);
+        }
+        return resultadoCpf;
+    }//end verificaCpfRepetido
 }
